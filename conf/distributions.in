@@ -1,0 +1,8 @@
+Origin: Storm
+Label: Storm APT Repository
+Suite: @@CODENAME@@
+Codename: @@CODENAME@@
+Architectures: amd64 arm64
+Components: main
+SignWith: @@SIGNKEY@@
+Description: Storm model checker - @@CODENAME@@ builds

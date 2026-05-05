@@ -1,0 +1,88 @@
+name: Publish APT nightlies
+
+on:
+  schedule:
+    - cron: "0 2 * * *"   # nightly at 02:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write  # required to push gh-pages
+
+env:
+  STORM_BASE_VERSION: 1.12.1
+  BUILD_OS: "debian12 debian13"
+
+jobs:
+  compute-version:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - name: Compute nightly version
+        id: version
+        run: |
+          DATE=$(date -u +%Y%m%d)
+          echo "version=${STORM_BASE_VERSION}~nightly${DATE}" >> "$GITHUB_OUTPUT"
+
+  build-apt:
+    needs: compute-version
+    uses: stormchecker/storm/.github/workflows/create_deb.yml@master
+    with:
+      version: ${{ needs.compute-version.outputs.version }}
+
+  publish:
+    needs: build-apt
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Download deb artifacts
+        uses: actions/download-artifact@v8
+        with:
+          # Download all deb artifacts produced by build-apt
+          path: debs
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y reprepro gnupg
+      - name: Import GPG signing key
+        run: |
+          echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --batch --import
+          echo "${{ vars.GPG_KEY_ID }}:6:" | gpg --batch --import-ownertrust
+      # Generate reprepro distributions for all systems
+      - name: Generate reprepro config
+        run: |
+          mkdir -p gh-pages/conf
+          : > gh-pages/conf/distributions
+          for base in ${BUILD_OS}; do
+            suite="${base}-nightly"
+            sed \
+              -e "s|@@CODENAME@@|$suite|g" \
+              -e "s|@@SIGNKEY@@|${{ vars.GPG_KEY_ID }}|g" \
+              conf/distributions.in >> gh-pages/conf/distributions
+            echo >> gh-pages/conf/distributions
+          done
+      # Add packages without exporting (avoids repeated signing)
+      - name: Add nightly packages
+        run: |
+          for base in ${BUILD_OS}; do
+            suite="${base}-nightly"
+            for dir in debs/storm-deb-${base}-*; do
+              if [ -d "$dir" ]; then
+                find "$dir" -name "*.deb" -exec \
+                  reprepro -b gh-pages includedeb "$suite" {} +
+              fi
+            done
+          done
+      # Export once
+      - name: Export APT repository metadata
+        run: |
+          reprepro -b gh-pages export
+      - name: Export public signing key
+        run: |
+          gpg --armor --export "${{ vars.GPG_KEY_ID }}" > gh-pages/storm-debian.gpg
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: gh-pages
+          force_orphan: true
