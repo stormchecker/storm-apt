@@ -1,4 +1,4 @@
-name: Publish APT nightlies
+name: Build and publish nightly APT packages
 
 on:
   schedule:
@@ -9,7 +9,6 @@ permissions:
   contents: write  # required to push gh-pages
 
 env:
-  STORM_BASE_VERSION: 1.12.1
   BUILD_OS: "debian12 debian13"
 
 jobs:
@@ -17,12 +16,37 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.version.outputs.version }}
+      storm_sha: ${{ steps.storm_sha.outputs.sha }}
     steps:
+      - name: Checkout Storm
+        uses: actions/checkout@v7
+        with:
+          repository: stormchecker/storm
+          ref: master
+          path: storm-version
+          fetch-depth: 1
+          sparse-checkout: |
+              CMakeLists.txt
+      - name: Get Storm commit
+        id: storm_sha
+        run: echo "sha=$(git -C storm-version rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - name: Extract base version from CMakeLists
+        id: base_version
+        run: |
+          # Extract the VERSION field from the project() block only
+          VERSION=$(sed -n '/^project(storm$/,/^)/{/^[[:space:]]*VERSION[[:space:]]/s/.*VERSION[[:space:]]*//p}' storm-version/CMakeLists.txt)
+          # Strip the .tweak suffix (e.g. 1.10.0.1 → 1.10.0) for nightly versioning
+          BASE=$(echo "$VERSION" | cut -d. -f1-3)
+          if [ -z "$BASE" ]; then
+            echo "Failed to extract version from CMakeLists.txt" >&2
+            exit 1
+          fi
+          echo "version=$BASE" >> "$GITHUB_OUTPUT"
       - name: Compute nightly version
         id: version
         run: |
           DATE=$(date -u +%Y%m%d)
-          echo "version=${STORM_BASE_VERSION}~nightly${DATE}" >> "$GITHUB_OUTPUT"
+          echo "version=${{ steps.base_version.outputs.version }}~nightly${DATE}" >> "$GITHUB_OUTPUT"
 
   build-apt:
     needs: compute-version
@@ -33,6 +57,9 @@ jobs:
   publish:
     needs: build-apt
     runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_REPO: ${{ github.repository }}
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -41,6 +68,27 @@ jobs:
         with:
           # Download all deb artifacts produced by build-apt
           path: debs
+      - name: Ensure nightly release exists
+        run: |
+          gh release view nightly >/dev/null 2>&1 || \
+            gh release create nightly --prerelease -t "Nightly build"
+      - name: Delete old deb assets from nightly release
+        run: |
+          gh release view nightly --json assets -q '.assets[].name' | \
+            while read -r name; do
+              case "$name" in *.deb)
+                gh release delete-asset nightly "$name" -y
+                ;;
+              esac
+            done
+      - name: Upload debs to nightly release
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: nightly
+          name: Nightly build
+          body: Automated nightly build from stormchecker/storm@${{ needs.compute-version.outputs.storm_sha }}
+          prerelease: true
+          files: debs/**/*.deb
       - name: Install dependencies
         run: sudo apt-get update && sudo apt-get install -y reprepro gnupg
       - name: Import GPG signing key
