@@ -1,4 +1,4 @@
-name: Publish APT nightlies
+name: Build and publish nightly APT packages
 
 on:
   schedule:
@@ -9,30 +9,36 @@ permissions:
   contents: write  # required to push gh-pages
 
 env:
-  STORM_BASE_VERSION: 1.12.1
   BUILD_OS: "debian12 debian13"
 
 jobs:
   compute-version:
+    uses: stormchecker/storm/.github/workflows/get-version.yml@master
+
+  compute-nightly-version:
+    needs: compute-version
     runs-on: ubuntu-latest
     outputs:
-      version: ${{ steps.version.outputs.version }}
+      version: ${{ steps.nightly.outputs.version }}
     steps:
       - name: Compute nightly version
-        id: version
+        id: nightly
         run: |
-          DATE=$(date -u +%Y%m%d)
-          echo "version=${STORM_BASE_VERSION}~nightly${DATE}" >> "$GITHUB_OUTPUT"
+          echo "version=${{ needs.compute-version.outputs.version }}~nightly$(date -u +%Y%m%d)" >> "$GITHUB_OUTPUT"
 
   build-apt:
-    needs: compute-version
+    needs: compute-nightly-version
     uses: stormchecker/storm/.github/workflows/create_deb.yml@master
     with:
-      version: ${{ needs.compute-version.outputs.version }}
+      version: ${{ needs.compute-nightly-version.outputs.version }}
+      build_type: 'Release'
 
   publish:
-    needs: build-apt
+    needs: [build-apt, compute-version]
     runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_REPO: ${{ github.repository }}
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -41,6 +47,27 @@ jobs:
         with:
           # Download all deb artifacts produced by build-apt
           path: debs
+      - name: Ensure nightly release exists
+        run: |
+          gh release view nightly >/dev/null 2>&1 || \
+            gh release create nightly --prerelease -t "Nightly build"
+      - name: Delete old deb assets from nightly release
+        run: |
+          gh release view nightly --json assets -q '.assets[].name' | \
+            while read -r name; do
+              case "$name" in *.deb)
+                gh release delete-asset nightly "$name" -y
+                ;;
+              esac
+            done
+      - name: Upload debs to nightly release
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: nightly
+          name: Nightly build
+          body: Automated nightly build from stormchecker/storm@${{ needs.compute-version.outputs.sha }}
+          prerelease: true
+          files: debs/**/*.deb
       - name: Install dependencies
         run: sudo apt-get update && sudo apt-get install -y reprepro gnupg
       - name: Import GPG signing key
