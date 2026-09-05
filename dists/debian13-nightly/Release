@@ -1,0 +1,29 @@
+Origin: Storm
+Label: Storm APT Repository
+Suite: debian13-nightly
+Codename: debian13-nightly
+Date: Sat, 05 Sep 2026 07:07:00 UTC
+Architectures: amd64 arm64
+Components: main
+Description: Storm model checker - debian13-nightly builds
+MD5Sum:
+ 21e8f6356d71d92343877fdc473894ea 637 main/binary-amd64/Packages
+ e0592137a0ffae90be4cc32c027805da 422 main/binary-amd64/Packages.gz
+ 306d6a1beea7c1483b8cb2ec631c1a05 163 main/binary-amd64/Release
+ 7810281ce60b1e468e8b07ddeca84f99 637 main/binary-arm64/Packages
+ 5038ee166abe9f652690303815773518 422 main/binary-arm64/Packages.gz
+ 48b637b2ac725939577cd4aa6c3b8072 163 main/binary-arm64/Release
+SHA1:
+ 246c7988cffe7471b308f1b687804f75a1def161 637 main/binary-amd64/Packages
+ b577129f8e8ce4c4eb8da9d3a6ec8953b802bbfa 422 main/binary-amd64/Packages.gz
+ 370059b8faf480dcfb75a85b193fa7217c2f7c41 163 main/binary-amd64/Release
+ 2ccac9251a70eff69849cab0dee0d0daf575c28b 637 main/binary-arm64/Packages
+ efff8fc1f5ed157153e6936143d87058022eb125 422 main/binary-arm64/Packages.gz
+ 76d960f9bf0350c15576242936d1867b5136abf5 163 main/binary-arm64/Release
+SHA256:
+ e99b78439a4d556398c9b1de4e15dd7a465113b43c8a75a4308ccb9cc841aafc 637 main/binary-amd64/Packages
+ bd49183fe6171878e9c4b880a1e64ce93e8b21aabd3d260546cec6ffe2db7486 422 main/binary-amd64/Packages.gz
+ 4511c3e8ebb2e2e0c5ae6ea15555165fde28a4fb6ac520aabfd6ba6c5d59e008 163 main/binary-amd64/Release
+ 09cb8f30ac065546e365bfe61e7a8b7160b99810e873a16261b2486d21694457 637 main/binary-arm64/Packages
+ 6576c9e9b89390e908a5dff286a71af18e0ff9705fc0118cecb0916a6bb24b09 422 main/binary-arm64/Packages.gz
+ 1ddf81dd8810d728551aa345a43b7278daf820544e0469df87bdbed901f90860 163 main/binary-arm64/Release
