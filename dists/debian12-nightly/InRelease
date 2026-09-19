@@ -1,0 +1,48 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Origin: Storm
+Label: Storm APT Repository
+Suite: debian12-nightly
+Codename: debian12-nightly
+Date: Sat, 19 Sep 2026 07:30:59 UTC
+Architectures: amd64 arm64
+Components: main
+Description: Storm model checker - debian12-nightly builds
+MD5Sum:
+ c6c05f455d7e230fecd4744768250c65 637 main/binary-amd64/Packages
+ 6bc10de0eed7b4f1c4a32f2d670de0b4 425 main/binary-amd64/Packages.gz
+ 57f8a4ce54e7359fc5cc600253be0018 163 main/binary-amd64/Release
+ ee30718a9e1fd3c12317712280f4a945 637 main/binary-arm64/Packages
+ 9e00175beaef0da4e98739336d8f199d 424 main/binary-arm64/Packages.gz
+ a0fe06beed057168d134398fbceac30e 163 main/binary-arm64/Release
+SHA1:
+ 5c4aabd0ee0d5eebf44b326fe29665f3b406d74f 637 main/binary-amd64/Packages
+ f0d304435a84c2463fd2abee5265b57e7e6350d9 425 main/binary-amd64/Packages.gz
+ 0c83d78559e4b43a632fe332f37c8304989ff081 163 main/binary-amd64/Release
+ a23278881cf0e7765d1e8ac54642ebd39d0fd917 637 main/binary-arm64/Packages
+ 0fc828296673f7063d4053c1405f4cdcc67a3230 424 main/binary-arm64/Packages.gz
+ 181f241275c54e104d95a829a7493020aac9857c 163 main/binary-arm64/Release
+SHA256:
+ 6883a799d7d4b8db1337d7530bd59511275bd1fe5b9f163c3546b1743df6a241 637 main/binary-amd64/Packages
+ 5adc68e8c65e2e2cf759a280689b7e19e197f1e924ff4dcf313d10b2d086aed9 425 main/binary-amd64/Packages.gz
+ 67693bed1dc50ea33dcf2692401d2446c24f0ed1b9808de434486ffc6295507c 163 main/binary-amd64/Release
+ ef5a65dbe436e1c921fd861cb957e7dcc08e23c85ddca797e17c4e61fd616521 637 main/binary-arm64/Packages
+ cab59ef7a63bac93cdcb73bb42d234905ec15f0d6e2ca2ae892949b570c19141 424 main/binary-arm64/Packages.gz
+ 7ee4188a54da0b65bb6b762e0aa3d047f63a0569cd5ee507fa745b7c9953936f 163 main/binary-arm64/Release
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEE/ROAjgWHXEnHHvL3+0voCjsIhI0FAmquOjMACgkQ+0voCjsI
+hI2jOw/+MPJQEmwCvqX8m/l9v6vmGjJ42ckESLy3Qw49Ui631zYywlTBDFGut1aF
+FLob8Bjoa1SNCsY+oGLaG72hv/Z4+PZm4e1/Kq7FDebEBvwhiu/qQ1ipKxKeyDeR
+Cge99Sa9W/O+z90hq+r7vzxr3/HDxtJEF90w7SPm/uKTfc7H8+qxQwtbeGqc68f1
+y+t55QSvDWzt6u+yH7g3x5NHdZZBXMw52oHLOVySMwU09YDpPizPVS82AuD0/v1j
+U9709bbuKGNScci4ffYssqzAG029Xvzmjw5MLq3yA8Rs0SlYpkwsaCmPqXpuqrsp
+vkxBq7DygUn8Dt/wAA0VMR5NXgC+f1LaikqcFGlKNVz7B/p7zKBjbeG3Gl7sK9XO
+fS3BCmvzMmMJBa4fIwEzJfjfKCpPcaQDa4olpjLfty+OEhWhaDz42BHhNjaCZ3br
+FAsQZaWqJUCCCQenWDRlE3onqohsUd6CJHTL7flEUzzrQ725/7aIjRAZGBCxbjXN
+23PZWvXmsKiRKnWpjKFLjKu+f4O2z/kN2Hh9GogQjbS7P9eOoa5AkPN39xkimhyJ
+1M9SOg4N7bp+kbZD6+0k46eW3+nTf07w8uj6Cnk/jRaRMiBb5cRpuQJZzq4bIHps
+VliNa6leUOyaBmrQYANOczCmKuCEgY32OYfNNbBsMZGSyqwFrvk=
+=NOOm
+-----END PGP SIGNATURE-----
