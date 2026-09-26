@@ -1,0 +1,18 @@
+Origin: Storm
+Label: Storm APT Repository
+Suite: debian12-nightly
+Codename: debian12-nightly
+Architectures: amd64 arm64
+Components: main
+SignWith: FD13808E05875C49C71EF2F7FB4BE80A3B08848D
+Description: Storm model checker - debian12-nightly builds
+
+Origin: Storm
+Label: Storm APT Repository
+Suite: debian13-nightly
+Codename: debian13-nightly
+Architectures: amd64 arm64
+Components: main
+SignWith: FD13808E05875C49C71EF2F7FB4BE80A3B08848D
+Description: Storm model checker - debian13-nightly builds
+
