@@ -1,0 +1,48 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Origin: Storm
+Label: Storm APT Repository
+Suite: debian12-nightly
+Codename: debian12-nightly
+Date: Sat, 10 Oct 2026 09:24:55 UTC
+Architectures: amd64 arm64
+Components: main
+Description: Storm model checker - debian12-nightly builds
+MD5Sum:
+ e52f0a0a021e2685b88d7f624486a12b 637 main/binary-amd64/Packages
+ 080d05e3d62d248b50df555f03797531 421 main/binary-amd64/Packages.gz
+ 57f8a4ce54e7359fc5cc600253be0018 163 main/binary-amd64/Release
+ 340c121a7539bf5c657f4267c3be8fe2 637 main/binary-arm64/Packages
+ 4db94da2faa5837c04dfeb96901f8768 424 main/binary-arm64/Packages.gz
+ a0fe06beed057168d134398fbceac30e 163 main/binary-arm64/Release
+SHA1:
+ 96023d6eb6bde0eb75f30ad701b875e72655c41c 637 main/binary-amd64/Packages
+ 2be2b9adf43068c579d2b6a3f618e0de3ef09ec9 421 main/binary-amd64/Packages.gz
+ 0c83d78559e4b43a632fe332f37c8304989ff081 163 main/binary-amd64/Release
+ 96ad76e94a66362c755ddb7fa1b396973b31cf4c 637 main/binary-arm64/Packages
+ fb56013dbcdb5226cf4a1684d2b11346f22b2380 424 main/binary-arm64/Packages.gz
+ 181f241275c54e104d95a829a7493020aac9857c 163 main/binary-arm64/Release
+SHA256:
+ 25b3a85295bbfd74b8ff9b86e38827804713d2dfc98dd93aa559586b292669a8 637 main/binary-amd64/Packages
+ c278ee24d45431152251da3434849af57b0cfb2938e9d191d335abab73b67c91 421 main/binary-amd64/Packages.gz
+ 67693bed1dc50ea33dcf2692401d2446c24f0ed1b9808de434486ffc6295507c 163 main/binary-amd64/Release
+ d7f19491cca447370464f6ffe57426a0855aebdbbc10858215a64ee8e00e223d 637 main/binary-arm64/Packages
+ 3f80f6312e39db52da99162151bacf55afb255081dd3efebc82464c40d4bd845 424 main/binary-arm64/Packages.gz
+ 7ee4188a54da0b65bb6b762e0aa3d047f63a0569cd5ee507fa745b7c9953936f 163 main/binary-arm64/Release
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEE/ROAjgWHXEnHHvL3+0voCjsIhI0FAmrKBGgACgkQ+0voCjsI
+hI1V2w//R/d+yd/gOckK65vTxjtUCLazEOwCd3L/BJtDn3/9vmGtNoeWEDpinCOL
+V/WApNxzThTIejY8G4LfIen/haAN3XYjJlrS6WzK5+ZaqdbzSVYh7CzGkDlpexjF
+45mx9JbAm1DGr0iFUOZA4bLSgr9L3sgK7T+/WIjItnSIMpxeo2n5/JUXF8YU3F3a
+LgrfKmD8AIdVjv19tBHQaBs4dMDWYj5TGn3VVg5kCuTgVi4RuYQjf+0nriryd1DH
+IXLqmTr1CI5cqZcoGvjkeFRiUWmIE9q1yd7mI4arpDIhjm7GNz2MKttcsdeJu4mf
+9EEgAxUm8eSvNZN9nmSU7cUxW/WCsBxU4qC0TnK7sF8rckSGUbZycTMWpB2FvsOS
+v0H5xElxGLXAWiYCRMK+LGv8x4ZakWXrgHz6gLVc/lHXwhiyl5KYC7/9of/Qint+
+8ZLpwCutrwErKBErsKwgduYtgtOWAnEpdY9YKpCoE3mkMceCola9T1LkymWl7KqA
+SEmrmwRtw/wFlnP0Qc4gPQWrLoFxR5545jhROUZOd6pnI77mcjHG2NsJ1JoXPMGY
+YMV65QAq4/Gki2R8wLJLlRYH2dCPMDkP6TGERWfWwDCNbNzW3EG4192ESRi7KHV0
+VT473e3N/Kp8spJGzpWsviswU8jQfHGPucrvt2gAtUeRn9DW4Xg=
+=D4ul
+-----END PGP SIGNATURE-----
