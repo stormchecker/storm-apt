@@ -1,0 +1,6 @@
+Archive: debian12-nightly
+Component: main
+Origin: Storm
+Label: Storm APT Repository
+Architecture: arm64
+Description: Storm model checker - debian12-nightly builds

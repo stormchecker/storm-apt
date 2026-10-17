@@ -1,0 +1,16 @@
+Package: storm
+Architecture: arm64
+Depends: libarchive-dev, libboost-dev, libcln-dev, libginac-dev, libglpk-dev, libgmp-dev, libxerces-c-dev, libz3-dev
+Priority: optional
+Section: devel
+Filename: pool/main/s/storm/storm_1.14.0~nightly20261017-debian12_arm64.deb
+Size: 30799222
+SHA256: ba45591a31eac4e3d3666883162f44be7ec5851e94274eaf9c9ca7f7983a29b9
+SHA1: 442a66af307cbe883ba36a2b3edf6f14e7fef175
+MD5sum: ec93d47baf611540a567c83ea0f1a179
+Description: Storm - A Modern Probabilistic Model Checker
+Homepage: https://www.stormchecker.org
+Maintainer: support@stormchecker.org
+Version: 1.14.0~nightly20261017-debian12
+Installed-Size: 209355
+
