@@ -2,7 +2,7 @@ name: Build and publish nightly APT packages
 
 on:
   schedule:
-    - cron: "0 2 * * *"   # nightly at 02:00 UTC
+    - cron: "16 2 * * *"   # nightly at 02:16 UTC
   workflow_dispatch:
 
 permissions:
